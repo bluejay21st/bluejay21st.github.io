@@ -1,5 +1,5 @@
 # 远程主题配置
-remote_theme: pages-themes/architect@v0.2.0
+remote_theme: papierkorp/jekyll-theme-horizon-flow
 plugins:
   - jekyll-remote-theme
 
@@ -7,7 +7,28 @@ plugins:
 title: 寒冬日志
 description: 一个自用笔记
 
-# 可选配置
-show_downloads: false
-excerpt_separator: "<!--more-->"
-google_analytics:
+# 导航菜单
+navigation:
+  - title: 首页
+    url: /index.html
+  - title: 分类
+    url: /categories.html
+  - title: 标签
+    url: /tags.html
+  - title: 归档
+    url: /archive.html
+
+# 页脚上方的侧边栏（最多5个元素）
+footer_sidebar:
+  arrangement:
+    - description
+    - tags
+    - categories
+    - recentposts
+  description:
+    enabled: true
+  tags:
+    enabled: true
+  categories:
+    enabled: true
+    
