@@ -9,5 +9,5 @@ description: 一个自用笔记
 
 # 可选配置
 show_downloads: false
-excerpt_separator: <!--more-->
+excerpt_separator: "<!--more-->"
 google_analytics:
