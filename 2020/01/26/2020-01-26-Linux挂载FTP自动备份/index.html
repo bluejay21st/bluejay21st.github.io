@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang=zh-CN>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="website">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        Linux挂载FTP自动备份网站和数据库 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 一个自用笔记 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar radius">
+            <img src="/images/avatar.png" />
+        </div>
+        <div class="name">
+            <i>观澜</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 一个自用笔记 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Linux挂载FTP自动备份网站和数据库
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2020-01-26 05:30:00</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#服务器" title="服务器">服务器</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#FTP" title="FTP">FTP</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>前几天给服务器装了LNMP一键包作为运行环境，相比面板少了自动备份等功能，查到可以将FTP挂在为本地目录，就尝试了一下。</p>
+<span id="more"></span>
+
+<p>首先给服务器安装软件 <code>curlftpfs</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">dnf -y install epel-release<br># CentOS 的源里没有 curlftpfs，需要先安装 epel-release<br><br>dnf -y install curlftpfs<br># 安装 curlftpfs<br><br>curlftpfs 192.168.1.1 /path -o user=username:password<br># 挂载，path为挂载在本地的目录，username为FTP用户名，password为FTP密码<br><br>umount /path<br># 取消挂载<br></code></pre></td></tr></table></figure>
+
+
+
+<hr>
+<p>创建需要用到的目录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">mkdir /home/backup<br>#备份目录<br><br>mkdir /home/backup/ftp<br>#FTP挂载目录<br><br>mkdir /home/backup/local<br>#本地备份目录<br><br>mkdir /home/backup/local/database<br>#本地数据库文件备份目录<br><br>mkdir /home/backup/local/sitefile<br>#本地网站文件备份目录<br><br>curlftpfs 192.168.1.1 /home/backup/ftp -o user=username:password<br>#挂载FTP目录至本地，将192.168.1.1替换为Ftp服务器地址，username替换为FTP用户名，password替换为FTP密码<br><br>mkdir /home/backup/ftp/backup<br>#FTP备份目录<br><br>mkdir /home/backup/ftp/database<br>#FTP数据库文件备份目录<br><br>mkdir /home/backup/ftp/sitefile<br>#FTP网站文件备份目录<br></code></pre></td></tr></table></figure>
+
+
+
+<hr>
+<p>创建脚本文件<code>/home/backup/backup.sh</code>内容如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">#!/bin/bash<br><br>nowDate=$(date +%Y%m%d_%H%M%S)<br>#用变量保存当前时间以便统一文件名中的时间<br><br>mysqldump -uUsername -pPassword Database | gzip &gt; /home/backup/local/database/Db_cwlog_$&#123;nowDate&#125;.sql.gz<br>#备份数据库，将Username替换为数据库用户名、Password替换为数据库密码、Database替换为数据库名<br><br>tar -zcPf /home/backup/local/sitefile/Site_cwlog_$&#123;nowDate&#125;.tar.gz /home/wwwroot/cwlog.net<br>#打包网站目录<br><br>curlftpfs 192.168.1.1 /home/backup/ftp -o user=username:password<br>#挂载FTP目录至本地，将192.168.1.1替换为Ftp服务器地址，username替换为FTP用户名，password替换为FTP密码<br><br>cp /home/backup/local/database/Db_cwlog_$&#123;nowDate&#125;.sql.gz /home/backup/ftp/backup/database/Db_cwlog_$&#123;nowDate&#125;.sql.gz<br>#复制数据库文件至FTP目录<br><br>cp /home/backup/local/sitefile/Site_cwlog_$&#123;nowDate&#125;.tar.gz /home/backup/ftp/backup/sitefile/Site_cwlog_$&#123;nowDate&#125;.tar.gz<br>#复制打包的网站文件至FTP目录<br><br>umount /home/backup/ftp<br>#卸载FTP目录<br></code></pre></td></tr></table></figure>
+
+
+
+<hr>
+<p>最后一步，使用<code>crontab</code>创建计划任务</p>
+<p>在SSH终端执行<code>crontab -e</code>，进入编辑器在文件末尾新建一行输入<code>30 01 * * * /bin/sh /home/backup/backup.sh</code></p>
+<p><code>Ctrl + o</code>写入文件</p>
+<p><code>Ctrl + m + a</code>确认写入</p>
+<p><code>Ctrl + x</code>退出编辑器</p>
+<p>备份脚本将在每天凌晨01：30执行。</p>
+
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        Site PV:<span id="busuanzi_site_pv">Loading...</span> |
+        Page PV:<span id="busuanzi_page_pv">Loading...</span> |
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> |
+        Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script src="//cdn.busuanzi.cc/busuanzi/3.6.9/busuanzi.min.js" defer></script>
+</html>

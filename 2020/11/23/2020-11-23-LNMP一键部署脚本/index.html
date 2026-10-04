@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang=zh-CN>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="website">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        CentOS8 一键部署LNMP（Nginx1.18 + php8.0 + Mysql8.0） - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 一个自用笔记 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar radius">
+            <img src="/images/avatar.png" />
+        </div>
+        <div class="name">
+            <i>观澜</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%84%9A%E6%9C%AC%E4%BB%A3%E7%A0%81%E5%A6%82%E4%B8%8B"><span class="toc-text">脚本代码如下</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95%E8%AF%B4%E6%98%8E"><span class="toc-text">目录说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%96%B0%E7%AB%99%E7%82%B9"><span class="toc-text">创建新站点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E6%A8%A1%E6%9D%BF"><span class="toc-text">配置文件模板</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AB%99%E7%82%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">站点配置文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Nginx%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">Nginx配置文件</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 一个自用笔记 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        CentOS8 一键部署LNMP（Nginx1.18 + php8.0 + Mysql8.0）
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2020-11-23 03:40:00</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#PHP" title="PHP">PHP</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#LNMP" title="LNMP">LNMP</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h3 id="脚本代码如下"><a href="#脚本代码如下" class="headerlink" title="脚本代码如下"></a>脚本代码如下</h3><span id="more"></span>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">#!/bin/bash<br>echo -n &quot;请设置MySQL密码：&quot;<br>read password<br><br>echo &quot;更新系统内核...&quot;<br>dnf -y update<br><br>echo &quot;正在安装 EPEL &amp;&amp; Remi...&quot;<br>dnf -y install https://dl.Fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm<br>dnf -y install https://rpms.remirepo.net/enterprise/remi-release-8.rpm<br><br>echo &quot;正在安装 Nginx-1.18...&quot;<br>dnf -y module reset nginx<br>dnf -y module enable nginx:1.18<br>dnf -y install nginx<br><br>echo &quot;正在设置 Nginx...&quot;<br>echo &#x27;user nginx;<br>worker_processes auto;<br>error_log /var/log/nginx/error.log;<br>pid /run/nginx.pid;<br><br>include /usr/share/nginx/modules/*.conf;<br><br>events &#123;<br>    use epoll;<br>    worker_connections 102400;<br>&#125;<br><br>http &#123;<br>    log_format  main  &#x27;&quot;&#x27;&quot;&#x27;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &#x27;&quot;&#x27;&quot;&#x27;<br>                        &#x27;&quot;&#x27;&quot;&#x27;$status $body_bytes_sent &quot;$http_referer&quot; &#x27;&quot;&#x27;&quot;&#x27;<br>                        &#x27;&quot;&#x27;&quot;&#x27;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#x27;&quot;&#x27;&quot;&#x27;;<br><br>    access_log  /var/log/nginx/access.log  main;<br><br>    sendfile            on;<br>    tcp_nopush          on;<br>    tcp_nodelay         on;<br>    keepalive_timeout   65;<br>    types_hash_max_size 2048;<br><br>    server_tokens off;<br><br>    gzip on;<br>    gzip_min_length 1k;<br>    gzip_buffers 4 16k;<br>    gzip_comp_level 2;<br>    gzip_types text/plain application/javascript application/x-javascript text/css application/xml text/javascript application/x-httpd-php image/jpeg image/gif image/png;<br>    gzip_vary off;<br>    gzip_disable &quot;MSIE [1-6]\.&quot;;<br><br>    include             /etc/nginx/mime.types;<br>    default_type        application/octet-stream;<br><br>    include /etc/nginx/conf.d/php-fpm.conf;<br>    include /var/www/wwwconf/*.conf;<br>&#125;&#x27; &gt; /etc/nginx/nginx.conf<br><br>echo &#x27;location ~ [^/]\.php(/|$)&#123;<br>    try_files $uri =404;<br>    fastcgi_intercept_errors on;<br>    fastcgi_index  index.php;<br>    include        fastcgi_params;<br>    fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;<br>    fastcgi_pass   php-fpm;<br>    set $real_script_name $fastcgi_script_name;<br>    if ($fastcgi_script_name ~ &quot;^(.+?\.php)(/.+)$&quot;) &#123;<br>        set $real_script_name $1;<br>        set $path_info $2;<br>    &#125;<br>    fastcgi_param SCRIPT_FILENAME $document_root$real_script_name;<br>    fastcgi_param SCRIPT_NAME $real_script_name;<br>    fastcgi_param PATH_INFO $path_info;<br>&#125;&#x27; &gt; /etc/nginx/default.d/php.conf<br><br>echo &quot;正在安装 PHP-8.0&quot;<br>dnf -y module reset php<br>dnf -y module enable php:remi-8.0<br>dnf -y install php php-fpm php-pdo php-mysqlnd php-mbstring<br><br>echo &quot;正在安装 MySQL-8.0&quot;<br>dnf -y module reset mysql<br>dnf -y module enable mysql:8.0<br>dnf -y install mysql mysql-server<br><br>echo &quot;正在设置 MySQL...&quot;<br>systemctl start mysqld<br>dnf -y install expect<br>echo &#x27;#!/usr/bin/expect<br>set timeout 60<br>set password [lindex $argv 0]<br>spawn mysql_secure_installation<br>expect &#123;<br>&quot;Press Y&quot; &#123; send &quot;Y\r&quot;; exp_continue&#125;<br>&quot;Press y&quot; &#123; send &quot;y\r&quot;; exp_continue&#125;<br>&quot;Please enter 0 = LOW&quot; &#123; send &quot;0\r&quot;; exp_continue&#125;<br>&quot;password&quot; &#123; send &quot;$password\r&quot;; exp_continue&#125;<br>&#125;<br>interact &#x27; &gt; mysql_secure_installation.exp <br>chmod +x mysql_secure_installation.exp<br>./mysql_secure_installation.exp $password <br>rm -rf mysql_secure_installation.exp<br><br>echo &quot;正在创建站点目录...&quot;<br>rm -rf /var/www/*<br>mkdir /var/www/wwwconf<br>mkdir /var/www/wwwroot<br>mkdir /var/www/wwwssl<br>mkdir /var/www/wwwlog<br><br>echo &#x27;正在创建默认站点...&#x27;<br>echo &#x27;server &#123;<br>    listen   80 default_server;<br>    listen   [::]:80;<br>    server_name    127.0.0.1;<br>    index   index.php index.html;<br>    root   /var/www/wwwroot/default;<br>    access_log /var/www/wwwlog/default.log;<br>    include /etc/nginx/default.d/php.conf;<br>&#125;&#x27; &gt; /var/www/wwwconf/default.conf<br>mkdir /var/www/wwwroot/default<br>echo &#x27;&lt;?php phpinfo(); ?&gt;&#x27; &gt; /var/www/wwwroot/default/index.php<br><br>echo &quot;正在安装 phpmyadmin...&quot;<br>wget -O phpmyadmin.zip https://files.phpmyadmin.net/phpMyAdmin/5.0.4/phpMyAdmin-5.0.4-all-languages.zip<br>unzip phpmyadmin.zip -d /var/www/wwwroot/default<br>mv /var/www/wwwroot/default/phpMyAdmin-5.0.4-all-languages /var/www/wwwroot/default/phpmyadmin<br>chmod -R 777 /var/www/wwwroot/default/*<br>rm -rf phpmyadmin.zip<br><br>echo &quot;设置自动更新...&quot;<br>echo &quot;30 01 * * * dnf -y update &gt;&gt; /tmp/tmp.txt&quot; &gt;&gt; /var/spool/cron/root<br>systemctl restart crond<br><br>echo &quot;正在启动 Nginx...&quot;<br>systemctl enable nginx<br>systemctl start nginx<br><br>echo &quot;正在启动 PHP...&quot;<br>systemctl enable php-fpm<br>systemctl start php-fpm<br><br>echo &quot;正在启动 MySQL...&quot;<br>systemctl enable mysqld<br>systemctl restart mysqld<br><br>echo &quot;安装完成！&quot;<br></code></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h3 id="目录说明"><a href="#目录说明" class="headerlink" title="目录说明"></a>目录说明</h3><p><strong>数据目录：</strong>&#x2F;var&#x2F;www</p>
+<p><strong>站点配置目录：</strong>&#x2F;var&#x2F;www&#x2F;conf</p>
+<p><strong>站点数据目录：</strong>&#x2F;var&#x2F;www&#x2F;wwwroot</p>
+<p><strong>站点证书目录：</strong>&#x2F;var&#x2F;www&#x2F;wwwssl</p>
+<p><strong>站点日志目录：</strong>&#x2F;var&#x2F;www&#x2F;wwwlog</p>
+<hr>
+<h3 id="创建新站点"><a href="#创建新站点" class="headerlink" title="创建新站点"></a>创建新站点</h3><p>1、创建站点配置文件<code>/var/www/conf/主域名.conf</code>，内容参考下方模板。</p>
+<p>2、创建站点根目录<code>/var/www/wwwroot/主域名/</code>，并通过<code>wget</code>下载或使用<code>sftp</code>上传网站文件。</p>
+<p>3、若开启HTTPS，上传域名证书文件至<code>/var/www/wwwssl/主域名/主域名.pem</code>，上传证书密钥文件至<code>/var/www/wwwssl/主域名/主域名.key</code>。</p>
+<p>4、执行<code>systemctl reload nginx</code>，若有提示信息无法启动，执行nginx查看错误信息进行修改。</p>
+<hr>
+<h3 id="配置文件模板"><a href="#配置文件模板" class="headerlink" title="配置文件模板"></a>配置文件模板</h3><h4 id="站点配置文件"><a href="#站点配置文件" class="headerlink" title="站点配置文件"></a>站点配置文件</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">server &#123;<br>    listen   80;<br>    listen   [::]:80;<br>    listen   443 ssl http2;<br>    listen   [::]:443 ssl http2;<br>    server_name    domain;<br>    index   index.php index.html;<br>    root   /var/www/wwwroot/website;<br>    access_log /var/www/wwwlog/website.log;<br>    <br>    # HTTPS相关配置<br>    ssl_certificate   /var/www/wwwssl/website/website.pem;<br>    ssl_certificate_key   /var/www/wwwssl/website/website.key;<br>    ssl_session_timeout 5m;<br>    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;<br>    ssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3;<br>    ssl_prefer_server_ciphers on;<br><br>    # 强制HTTPS<br>    if ($server_port !~ 443)&#123;<br>        rewrite ^(/.*)$ https://$host$1 permanent;<br>    &#125;<br><br>    # 伪静态规则，需根据程序修改<br>    if (!-e $request_filename) &#123;<br>        rewrite  ^/(.*)$  /index.php/$1  last;<br>        break;<br>    &#125;<br><br>    include /etc/nginx/default.d/php.conf;<br>    include /etc/nginx/default.d/pathinfo.conf;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="Nginx配置文件"><a href="#Nginx配置文件" class="headerlink" title="Nginx配置文件"></a>Nginx配置文件</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">user nginx;<br>worker_processes auto;<br>error_log /var/log/nginx/error.log;<br>pid /run/nginx.pid;<br><br>include /usr/share/nginx/modules/*.conf;<br><br>events &#123;<br>    use epoll;<br>    worker_connections 102400;<br>&#125;<br><br>http &#123;<br>    log_format  main  &#x27;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &#x27;<br>                        &#x27;$status $body_bytes_sent &quot;$http_referer&quot; &#x27;<br>                        &#x27;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#x27;;<br><br>    access_log  /var/log/nginx/access.log  main;<br><br>    sendfile            on;<br>    tcp_nopush          on;<br>    tcp_nodelay         on;<br>    keepalive_timeout   65;<br>    types_hash_max_size 2048;<br><br>    server_tokens off;<br><br>    gzip on;<br>    gzip_min_length 1k;<br>    gzip_buffers 4 16k;<br>    gzip_comp_level 2;<br>    gzip_types text/plain application/javascript application/x-javascript text/css application/xml text/javascript application/x-httpd-php image/jpeg image/gif image/png;<br>    gzip_vary off;<br>    gzip_disable &quot;MSIE [1-6]\.&quot;;<br><br>    include             /etc/nginx/mime.types;<br>    default_type        application/octet-stream;<br><br>    include /etc/nginx/conf.d/php-fpm.conf;<br>    include /var/www/conf/*.conf;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        Site PV:<span id="busuanzi_site_pv">Loading...</span> |
+        Page PV:<span id="busuanzi_page_pv">Loading...</span> |
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> |
+        Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script src="//cdn.busuanzi.cc/busuanzi/3.6.9/busuanzi.min.js" defer></script>
+</html>

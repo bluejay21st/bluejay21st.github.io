@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang=zh-CN>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="website">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        PHP ReflectionClass反射类 依赖注入 控制反转 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 一个自用笔记 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar radius">
+            <img src="/images/avatar.png" />
+        </div>
+        <div class="name">
+            <i>观澜</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 一个自用笔记 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        PHP ReflectionClass反射类 依赖注入 控制反转
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2021-07-31 22:19:00</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#PHP" title="PHP">PHP</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#设计模式" title="设计模式">设计模式</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>PHP ReflectionClass反射类 依赖注入 控制反转</p>
+<p>依赖注入：A类需要调用B类的功能，所以需要一个B类的对象，一般的写法是在A类中直接实例化B类以获取对象，而依赖注入则是在A类外部实例化B类，然后将B类的对象通过参数注入到A类。</p>
+<p>控制反转：将类与类之间的依赖关系管理由内部提到外部进行管理，以此降低程序组件间的耦合度。</p>
+<p>ReflectionClass反射类：可用于判断一个类是否可以被实例化、是否有构造函数、获取构造函数的参数、判断参数是否为一个依赖类。</p>
+<p>使用反射，我们可以实现从外部判断一个类需要依赖哪些其他类，然后使用程序自动将被依赖类实例化，注入要调用的类。</p>
+<p>下面是一个浅显易懂的例子，<code>Controller</code>类需要依赖<code>Db</code>类，所以在构造函数中将<code>Db</code>作为参数，我们在<code>test.php</code>中编写一个<code>maker()</code>函数用于自动创建类的对象，当被依赖的类需要依赖其它类时，<code>maker()</code>函数会被递归调用。</p>
+<span id="more"></span>
+
+
+<hr>
+<p><code>Db.php</code></p>
+<pre><code>&lt;?php
+namespace support;
+
+class Db
+{
+    public function __construct()
+    {}
+    public function query()
+    {}
+}
+</code></pre>
+<hr>
+<p><code>Controller.php</code></p>
+<pre><code>&lt;?php
+namespace application;
+use support\Db;
+class Controller
+{
+    public $db;
+    public function __construct(Db $db, $data = FALSE)
+    {
+        $this-&gt;db = $db;
+    }
+    public function hello()
+    {
+        var_dump($this-&gt;db);
+        echo &quot;Hello World \n&quot;;
+    }
+}
+</code></pre>
+<hr>
+<p><code>test.php</code></p>
+<pre><code>&lt;?php
+namespace test;
+use ReflectionClass;
+function maker($className){
+    // 实例化反射类
+    $reflection = new ReflectionClass($className);
+    var_dump($reflection);
+    
+    //判断类是否可以实例化
+    $isInstantiable = $reflection-&gt;isInstantiable();
+    var_dump($isInstantiable);
+    if($isInstantiable){   //此类可以实例化才能继续
+        //获取构造函数
+        $constructor = $reflection-&gt;getConstructor();
+        var_dump($constructor);
+        
+        if($constructor){   //需要被注入的类写在构造函数的参数中，以此检测是否需要注入
+            //获取构造函数参数
+            $params = $constructor-&gt;getParameters();
+            var_dump($params);
+            
+            if($params){   //需要被注入的类写在构造函数的参数中，以此检测是否需要注入
+                //遍历此函数的参数，判断参数为需要注入的类还是其他值
+                $dependencies = [];
+                foreach($params as $param){
+                    //参数为类时getClass()会返回一个带有类名的对象，不为类时会返回NULL
+                    $dependency = $param-&gt;getClass();
+                    if(is_null($dependency)){
+                        //不为类时直接保存到数组占位
+                        $dependencies[] = $dependency;
+                    }else{
+                        //需要注入的参数为类时，递归调用本函数获取需要注入的类的对象
+                        $dependencies[] = maker($dependency-&gt;name);
+                    }
+                }
+                var_dump($dependencies);
+                
+                //使用处理好的参数实例化本类，并返回对象
+                return $reflection-&gt;newInstanceArgs($dependencies);
+            }else{   //构造函数无参数表示无需注入，直接实例化返回对象
+                return new $className;
+            }
+        }else{   //无构造函数表示无需注入，直接实例化返回对象
+            return new $className;
+        }
+    }else{   //不可以实例化的返回NULL
+        return NULL;
+    }
+}
+
+include &#39;Db.php&#39;;
+include &#39;Controller.php&#39;;
+
+$controller = maker(&quot;application\Controller&quot;);
+$controller -&gt; hello();
+</code></pre>
+<hr>
+<p>结果如下：</p>
+<p><img src="/images/post/PHP-ReflectionClass.jpg" alt="PHP-ReflectionClass.jpg"></p>
+
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        Site PV:<span id="busuanzi_site_pv">Loading...</span> |
+        Page PV:<span id="busuanzi_page_pv">Loading...</span> |
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> |
+        Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script src="//cdn.busuanzi.cc/busuanzi/3.6.9/busuanzi.min.js" defer></script>
+</html>
